@@ -30,8 +30,20 @@ dotenv.config({
 });
 
 
-const io = new Server(httpServer, {
-  // ...
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const io = require('socket.io')(httpServer, {
+  cors: {
+    origin: 'https://closet-collections-308301.uc.r.appspot.com',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['my-custom-header'],
+    credentials: true
+  }
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 
@@ -69,6 +81,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/api/search', Find);
 
 
@@ -109,17 +122,6 @@ app.post('/items', (req: Request, res: Response): Promise<any> => {
 
 });
 
-// app.get('/likes', (req: Request, res: Response): Promise<any> => {
-//   return getLikes(req.cookies.thesis)
-//     .then((data) => res.json(data))
-//     .catch((err) => console.warn(err));
-// });
-
-// app.post('/likes', (req: Request, res: Response): Promise<any> => {
-//   return saveLikes(req.body, req.cookies.thesis)
-//     .then((data) => console.log('Likes created', data))
-//     .catch((err) => console.warn(err));
-// });
 
 app.delete('/items/:id', (req: Request, res: Response): Promise<any> => {
   return deleteItem(req.params)
@@ -276,7 +278,7 @@ app.get('/comments', (req: Request, res: Response): any => {
 });
 
 
-
+// in deployed version its app.listen(port, () => )  CHANGE port in deployed version to 8080
 httpServer.listen(3000, () => {
   console.log(`Server is listening on http://localhost:${port}`);
 });

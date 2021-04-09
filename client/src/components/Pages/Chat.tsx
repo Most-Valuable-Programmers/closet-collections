@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import {io} from 'socket.io-client';
+import { io } from 'socket.io-client';
 import moment from 'moment';
 import Message from '../models/Message';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
@@ -8,8 +8,19 @@ import Footer from './Footer';
 import Grid from '@material-ui/core/Grid';
 
 // const <input  = require('@material-ui/core<input')
-const socket = io('http://localhost:3000');
-// const socket = io('https://closet-collections.uc.r.appspot.com');
+// const socket = io('http://localhost:3000');
+// const socket = io('http://closet-collections-308301.uc.r.appspot.com');
+// const socket = io('https://8080-cs-145312122908-default.cs-us-east1-wzxb.cloudshell.dev');
+
+// vvvvvv use this for deployed version vvvvvv
+// const socket = io('https://closet-collections-308301.uc.r.appspot.com', {
+const socket = io('http://localhost:3000', {
+  withCredentials: true,
+  extraHeaders: {
+    'my-custom-header': 'closet'
+  }
+});
+
 
 const Chat = (): ReactElement => {
 
