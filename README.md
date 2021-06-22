@@ -2,7 +2,7 @@
 Fashion application with the latest clothing and apparel releases.
 
 # Description
-Closet Collections is designed to allow the user to curate a collection of clothing items and create/save outfits based on those items.
+Closet Collections is designed to allow the user to create a collection of clothing items and create/save outfits based on those items.
 
 Upon entry to the site, the User is presented with the publics 'Top Rated' and 'Worst Rated' outfit based public opinion, and an outfit based on the weather. Additionally the user may choose to display a live stream chat to engage in conversations regarding upcoming clothing items they are looking forward to.
 
